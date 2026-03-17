@@ -15,10 +15,12 @@ def load_data(filepath):
     return data
 def main():
     data = load_data(dataset)
-main()
 
 def filter_data(data, column, value):
     filtered = []
     for row in data:
         if row[column] == value:
-            
+            filtered.append(row)
+    return filtered
+
+
