@@ -21,5 +21,4 @@ def filter_data(data, column, value):
     filtered = []
     for row in data:
         if row[column] == value:
-            filtered.append(row)
-    return filtered
+            
