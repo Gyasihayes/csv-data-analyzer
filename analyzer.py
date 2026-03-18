@@ -15,6 +15,7 @@ def load_data(filepath):
     return data
 def main():
     data = load_data(dataset)
+    
 
 def filter_data(data, column, value):
     filtered = []
@@ -22,5 +23,15 @@ def filter_data(data, column, value):
         if row[column] == value:
             filtered.append(row)
     return filtered
+
+def get_category_stats(data, column):
+    stat_numbers = []
+    for row in data:
+        stat_values = float(row[column])
+        stat_numbers.append(stat_values)
+    max_num = max(stat_numbers)
+    min_num = min(stat_numbers)
+    average = sum(stat_numbers) / len(stat_numbers)
+    return min_num, max_num, average
 
 
