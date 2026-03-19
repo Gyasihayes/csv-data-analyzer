@@ -1,8 +1,13 @@
-# header here
+# Gyasi Hayes
+# Description
+# Submitting date
+# Chosen dataset: sports.csv
 dataset = "sports.csv"
 def load_data(filepath):
     """
-    
+    Thus function reads the CSV file and turns it into a list
+    The parameter is (filepath), which is the path to the CSV file
+    The list containing the data is returned
     """
     data = []
     with open(filepath, "r") as file:
@@ -19,7 +24,9 @@ def load_data(filepath):
         
 def filter_data(data, column, value):
     """
-    
+    This function filters the dataset based on a chosen column and value
+     The parameters are (data), which is just where the data from the CSV is stored, and
+    (column), which will hold whatever columun you want to get stats for, and (value) is whatever value is picked
     """
     filtered = []
     for row in data:
@@ -29,7 +36,10 @@ def filter_data(data, column, value):
 
 def get_category_stats(data, column):
     """
-    
+    This function calculates the minimum, maximum, and average for whichever column is picked
+    The parameters are (data), which is just where the data from the CSV is stored, and
+    (column), which will hold whatever columun you want to get stats for
+    The minimum, maximum, and average are returned.
     """
     stat_numbers = []
     for row in data:
@@ -42,7 +52,10 @@ def get_category_stats(data, column):
 
 def summarize(data):
     """
-    
+    This function creates a summary of tha data in my chosen dataset
+    The parameter is (data), which is just where the data from the CSV is stored
+    The dictionary cotaining the number of records, number of genres, and average
+    rating is returned.
     """
     num_records = len(data)
     genres = set()
@@ -58,6 +71,11 @@ def summarize(data):
     return summary
 
 def display_summary(data):
+    """
+    This function outputs the summarized data from the summarize(data) function
+    The parameter is (data), which is where the data from the CSV is scored
+    Nothing is returned
+    """
     summary = summarize(data)
     print("Here is a summary of the data:")
     print(f"The total number of records is: {summary['num_records']}")
@@ -66,7 +84,9 @@ def display_summary(data):
 
 def generate_insights(data):
     """
-    
+    This function creates a list with my 4 insights about the dataset I picked
+    The parameter is (data), which is where the data from the CSV is scored
+    The list of my insights is returned
     """
     insights = []
     insights.append("The sport with the most people in the data is Basketball")
