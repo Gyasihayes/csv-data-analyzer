@@ -64,10 +64,20 @@ def display_summary(data):
     print(f"The total number of genres is: {summary['num_of_genres']}")
     print(f"The average player rating is: {summary['average_rating']}")
 
+def generate_insights(data):
+    """
+    
+    """
+    insights = []
+    insights.append("The sport with the most people in the data is Basketball")
+    insights.append("Despite being the fastest man in history, Usain Bolt has a extremely low value")
+    insights.append("The sport with the highest values is Soccer")
+    insights.append("The sport with the lowest values are winter sports, such as Skiing and Snowboarding")
+    return insights
+
 def main():
     """
     
     """
     data = load_data(dataset)
-        
         
