@@ -1,6 +1,9 @@
 # header here
 dataset = "sports.csv"
 def load_data(filepath):
+    """
+    
+    """
     data = []
     with open(filepath, "r") as file:
         header = file.readline().strip().split(",")
@@ -14,10 +17,16 @@ def load_data(filepath):
             data.append(row)
     return data
 def main():
+    """
+    
+    """
     data = load_data(dataset)
     
-
+    
 def filter_data(data, column, value):
+    """
+    
+    """
     filtered = []
     for row in data:
         if row[column] == value:
@@ -25,6 +34,9 @@ def filter_data(data, column, value):
     return filtered
 
 def get_category_stats(data, column):
+    """
+    
+    """
     stat_numbers = []
     for row in data:
         stat_values = float(row[column])
@@ -34,4 +46,27 @@ def get_category_stats(data, column):
     average = sum(stat_numbers) / len(stat_numbers)
     return min_num, max_num, average
 
+def summarize(data):
+    """
+    
+    """
+    num_records = len(data)
+    genres = set()
+    total_rating = 0
+    for row in data:
+        genres.add(row["genre"])
+        total_rating += float(row["rating"])
+    num_of_genres = len(genres)
+    total_rating = sum(total_rating)
+    average_rating = round(total_rating / num_records, 2)
 
+    summary = {"num_records": num_records, "num_of_genres": num_of_genres, "average_rating": average_rating}
+    return summary
+
+def display_summary_data(data):
+    print("Here is a summary of the data:")
+    print(f"The total number of records is: {summary["num_records"]}")
+    print(f"The total number of records is: {summary["num_records"]}")
+    print(f"The total number of records is: {summary["num_records"]}")
+        
+        
