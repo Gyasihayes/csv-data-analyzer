@@ -16,13 +16,7 @@ def load_data(filepath):
                 row[header[i]] = values[i]
             data.append(row)
     return data
-def main():
-    """
-    
-    """
-    data = load_data(dataset)
-    
-    
+        
 def filter_data(data, column, value):
     """
     
@@ -63,10 +57,17 @@ def summarize(data):
     summary = {"num_records": num_records, "num_of_genres": num_of_genres, "average_rating": average_rating}
     return summary
 
-def display_summary_data(data):
+def display_summary(data):
+    summary = summarize(data)
     print("Here is a summary of the data:")
-    print(f"The total number of records is: {summary["num_records"]}")
-    print(f"The total number of records is: {summary["num_records"]}")
-    print(f"The total number of records is: {summary["num_records"]}")
+    print(f"The total number of records is: {summary['num_records']}")
+    print(f"The total number of genres is: {summary['num_of_genres']}")
+    print(f"The average player rating is: {summary['average_rating']}")
+
+def main():
+    """
+    
+    """
+    data = load_data(dataset)
         
         
