@@ -96,6 +96,10 @@ def generate_insights(data):
 
 
 def export_report(data, output_filepath, top_n=5):
+    """
+
+    """
+
     top_entries = []
     temp_data = data[:]
 
@@ -111,8 +115,8 @@ def export_report(data, output_filepath, top_n=5):
 
     with open(output_filepath, "w") as file:
         file.write("Summary:\n")
-        file.write(f"Total Records: {summary['total_records']}\n")
-        file.write(f"Unique Genres: {summary['unique_genres']}\n")
+        file.write(f"Total Records: {summary['num_records']}\n")
+        file.write(f"Unique Genres: {summary['num_of_genres']}\n")
         file.write(f"Average Rating: {summary['average_rating']}\n\n")
 
         file.write(f"Top {top_n} Players:\n")
@@ -127,4 +131,10 @@ def main():
     
     """
     data = load_data(dataset)
+    display_summary(data)
+    generate_insights(data)
+    export_report(data, "report.txt")
+
+main()
+
         
