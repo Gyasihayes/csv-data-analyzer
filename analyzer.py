@@ -5,7 +5,7 @@
 dataset = "sports.csv"
 def load_data(filepath):
     """
-    Thus function reads the CSV file and turns it into a list
+    This function reads the CSV file and turns it into a list
     The parameter is (filepath), which is the path to the CSV file
     The list containing the data is returned
     """
@@ -25,7 +25,7 @@ def load_data(filepath):
 def filter_data(data, column, value):
     """
     This function filters the dataset based on a chosen column and value
-     The parameters are (data), which is just where the data from the CSV is stored, and
+    The parameters are (data), which is just where the data from the CSV is stored, and
     (column), which will hold whatever columun you want to get stats for, and (value) is whatever value is picked
     """
     filtered = []
@@ -47,12 +47,12 @@ def get_category_stats(data, column):
         stat_numbers.append(stat_values)
     max_num = max(stat_numbers)
     min_num = min(stat_numbers)
-    average = sum(stat_numbers) / len(stat_numbers)
+    average = round(sum(stat_numbers) / len(stat_numbers), 2)
     return min_num, max_num, average
 
 def summarize(data):
     """
-    This function creates a summary of tha data in my chosen dataset
+    This function creates a summary of the data in my chosen dataset
     The parameter is (data), which is just where the data from the CSV is stored
     The dictionary cotaining the number of records, number of genres, and average
     rating is returned.
@@ -64,7 +64,6 @@ def summarize(data):
         genres.add(row["genre"])
         total_rating += float(row["rating"])
     num_of_genres = len(genres)
-    total_rating = sum(total_rating)
     average_rating = round(total_rating / num_records, 2)
 
     summary = {"num_records": num_records, "num_of_genres": num_of_genres, "average_rating": average_rating}
@@ -94,6 +93,34 @@ def generate_insights(data):
     insights.append("The sport with the highest values is Soccer")
     insights.append("The sport with the lowest values are winter sports, such as Skiing and Snowboarding")
     return insights
+
+
+def export_report(data, output_filepath, top_n=5):
+    top_entries = []
+    temp_data = data[:]
+
+    for i in range(top_n):
+        highest = temp_data[0]
+        for row in temp_data:
+            if float(row["rating"]) > float(highest["rating"]):
+                highest = row
+        top_entries.append(highest)
+        temp_data.remove(highest)
+    summary = summarize(data)
+    insights = generate_insights(data)
+
+    with open(output_filepath, "w") as file:
+        file.write("Summary:\n")
+        file.write(f"Total Records: {summary['total_records']}\n")
+        file.write(f"Unique Genres: {summary['unique_genres']}\n")
+        file.write(f"Average Rating: {summary['average_rating']}\n\n")
+
+        file.write(f"Top {top_n} Players:\n")
+        for row in top_entries:
+            file.write(f"{row['title']} - Rating: {row['rating']}\n")
+        file.write("Here are my insights:\n")
+        for insight in insights:
+            file.write(insight + "\n")
 
 def main():
     """
