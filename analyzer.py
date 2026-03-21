@@ -1,6 +1,7 @@
 # Gyasi Hayes
-# Description
-# Submitting date
+# Description: This program loads data from a csv file, then filters through it, summarizes it, calculates 
+# some more advanced stats, generates my insights, and then outputs them into a separate file.
+# Submitting date: 3/20/26
 # Chosen dataset: sports.csv
 DATASET = "sports.csv"
 def load_data(filepath):
@@ -11,15 +12,15 @@ def load_data(filepath):
     """
     data = []
     with open(filepath, "r") as file:
-        header = file.readline().strip().split(",")
+        header = file.readline().strip().split(",") #Takes the first line strips the white face, and separates them by commas
 
         for line in file:
-            values = line.strip().split(",")
+            values = line.strip().split(",") #Splits the current line into separate values
             row = {}
-
+            #Makes each column header a key and its corresponding value from the row
             for i in range(len(header)):
-                row[header[i]] = values[i]
-            data.append(row)
+                row[header[i]] = values[i] 
+            data.append(row) 
     return data
         
 def filter_data(data, column, value):
@@ -30,7 +31,7 @@ def filter_data(data, column, value):
     """
     filtered = []
     for row in data:
-        if row[column] == value:
+        if row[column] == value: #Only includes rows where the column matches the chosen value
             filtered.append(row)
     return filtered
 
@@ -43,11 +44,13 @@ def get_category_stats(data, column):
     """
     stat_numbers = []
     for row in data:
-        stat_values = float(row[column])
-        stat_numbers.append(stat_values)
+        stat_values = float(row[column]) # Converts the string values into floats
+        stat_numbers.append(stat_values) # Adds the stat numbers to the list of stat values
+    
+    #Finds the minimum, maximum, and average(rounded to 2 decimal points)
     max_num = max(stat_numbers)
     min_num = min(stat_numbers)
-    average = round(sum(stat_numbers) / len(stat_numbers), 2)
+    average = round(sum(stat_numbers) / len(stat_numbers), 2) 
     return min_num, max_num, average
 
 def summarize(data):
@@ -61,11 +64,12 @@ def summarize(data):
     genres = set()
     total_rating = 0
     for row in data:
-        genres.add(row["genre"])
-        total_rating += float(row["rating"])
+        genres.add(row["genre"]) #Tracks the unique genres
+        total_rating += float(row["rating"]) #The sum of all the ratings
     num_of_genres = len(genres)
     average_rating = round(total_rating / num_records, 2)
 
+    #Creates a dictionary with the total amount of records, number of genres, and averaged rating
     summary = {"total_records": num_records, "unique_genres": num_of_genres, "average_rating": average_rating}
     return summary
 
@@ -75,6 +79,7 @@ def display_summary(data):
     The parameter is (data), which is where the data from the CSV is scored
     Nothing is returned
     """
+    #Outputs the summary
     summary = summarize(data)
     print("Here is a summary of the data:")
     print(f"The total number of records is: {summary['total_records']}")
@@ -87,6 +92,7 @@ def generate_insights(data):
     The parameter is (data), which is where the data from the CSV is scored
     The list of my insights is returned
     """
+    #Creates a list, where my insights are later appended to
     insights = []
     insights.append("The sport with the most people in the data is Basketball")
     insights.append("Despite being the fastest man in history, Usain Bolt has a extremely low value")
@@ -104,19 +110,20 @@ def export_report(data, output_filepath, top_n=5):
     """
 
     top_entries = []
-    temp_data = data[:]
+    temp_data = data[:] #Makes a copy of the data so only the top 5 ratings can be taken out without messing with the other data
 
     for i in range(top_n):
         highest = temp_data[0]
         for row in temp_data:
             if float(row["rating"]) > float(highest["rating"]):
                 highest = row
-        top_entries.append(highest)
-        temp_data.remove(highest)
+        top_entries.append(highest) #Adds the highest entried into the list 
+        temp_data.remove(highest) #Removes the previous items so it won't be checked again
     summary = summarize(data)
     insights = generate_insights(data)
 
-    with open(output_filepath, "w") as file:
+    with open(output_filepath, "w") as file: #Opens a new file to be written to
+        #Writes my summary into the newly created file
         file.write("Summary:\n")
         file.write(f"Total Records: {summary['total_records']}\n")
         file.write(f"Unique Genres: {summary['unique_genres']}\n")
@@ -130,8 +137,11 @@ def export_report(data, output_filepath, top_n=5):
             file.write(insight + "\n")
 
 def main():
+    #Calls all the functions in order
     """
-    
+    This function is where all the needed functions are called
+    No parameters
+    Nothing is returned.
     """
     data = load_data(DATASET)
     display_summary(data)
@@ -139,5 +149,3 @@ def main():
     export_report(data, "report.txt")
 
 main()
-
-        
