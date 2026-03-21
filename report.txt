@@ -1,2 +1,16 @@
 Summary:
 Total Records: 50
+Unique Genres: 15
+Average Rating: 9.35
+
+Top 5 Players:
+Simone Biles - Rating: 9.9
+Michael Phelps - Rating: 9.9
+Tiger Woods - Rating: 9.8
+Usain Bolt - Rating: 9.8
+Eliud Kipchoge - Rating: 9.8
+Here are my insights:
+The sport with the most people in the data is Basketball
+Despite being the fastest man in history, Usain Bolt has a extremely low value
+The sport with the highest values is Soccer
+The sport with the lowest values are winter sports, such as Skiing and Snowboarding

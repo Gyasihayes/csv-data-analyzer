@@ -2,7 +2,7 @@
 # Description
 # Submitting date
 # Chosen dataset: sports.csv
-dataset = "sports.csv"
+DATASET = "sports.csv"
 def load_data(filepath):
     """
     This function reads the CSV file and turns it into a list
@@ -66,7 +66,7 @@ def summarize(data):
     num_of_genres = len(genres)
     average_rating = round(total_rating / num_records, 2)
 
-    summary = {"num_records": num_records, "num_of_genres": num_of_genres, "average_rating": average_rating}
+    summary = {"total_records": num_records, "unique_genres": num_of_genres, "average_rating": average_rating}
     return summary
 
 def display_summary(data):
@@ -97,7 +97,10 @@ def generate_insights(data):
 
 def export_report(data, output_filepath, top_n=5):
     """
-
+    Writes a summary report to a new file that is created
+    The parameters are (data) which is where the CSV is scored, (output_filepath) which is the file path
+    that the summary will be written to, and (top_n) which is the number of top rated entries
+    Nothing is returned
     """
 
     top_entries = []
@@ -115,8 +118,8 @@ def export_report(data, output_filepath, top_n=5):
 
     with open(output_filepath, "w") as file:
         file.write("Summary:\n")
-        file.write(f"Total Records: {summary['num_records']}\n")
-        file.write(f"Unique Genres: {summary['num_of_genres']}\n")
+        file.write(f"Total Records: {summary['total_records']}\n")
+        file.write(f"Unique Genres: {summary['unique_genres']}\n")
         file.write(f"Average Rating: {summary['average_rating']}\n\n")
 
         file.write(f"Top {top_n} Players:\n")
@@ -130,7 +133,7 @@ def main():
     """
     
     """
-    data = load_data(dataset)
+    data = load_data(DATASET)
     display_summary(data)
     generate_insights(data)
     export_report(data, "report.txt")
