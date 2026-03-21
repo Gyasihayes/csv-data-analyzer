@@ -77,8 +77,8 @@ def display_summary(data):
     """
     summary = summarize(data)
     print("Here is a summary of the data:")
-    print(f"The total number of records is: {summary['num_records']}")
-    print(f"The total number of genres is: {summary['num_of_genres']}")
+    print(f"The total number of records is: {summary['total_records']}")
+    print(f"The total number of genres is: {summary['unique_genres']}")
     print(f"The average player rating is: {summary['average_rating']}")
 
 def generate_insights(data):
